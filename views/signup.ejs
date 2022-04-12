@@ -1,0 +1,16 @@
+<%- include('partials/_header.ejs')%>
+
+
+    <form method="POST" action="/api/signup">
+        <input type="text" name="username" id="" placeholder="Username" required value="<%= username %>">
+        <input type="email" name="email" id="" placeholder="Email" required value="<%= email %>">
+        <input type="text" name="address" id="" placeholder="Address" required value="<%= address %>">
+        <input type="text" name="tel_no1" id="" placeholder="Tel. Number 1" required value="<%= tel_no1 %>">
+        <input type="text" name="tel_no2" id="" placeholder="Tel. Number 2" required value="<%= tel_no2 %>">
+        <input type="text" name="password" id="" placeholder="password" required value="<%= password %>">
+
+        <input type="submit" value="Sign Up">
+    </form>
+
+
+<%- include('partials/_header.ejs')%>    

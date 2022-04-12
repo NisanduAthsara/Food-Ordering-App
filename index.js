@@ -4,8 +4,11 @@ const dotenv = require('dotenv/config')
 const routes = require('./server/routes/router')
 const path = require('path')
 const mongoose = require('mongoose')
+const cookie_parser = require('cookie-parser')
 
 const PORT = process.env.PORT || 3000
+
+app.use(cookie_parser());
 
 app.use(express.urlencoded({extended:true}))
 

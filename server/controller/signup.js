@@ -1,5 +1,6 @@
 const DB = require('../model/model')
 const bcrypt = require('bcrypt')
+const IsValid = require('./funcs')
 
 exports.signup = async (req,res)=>{
     try{
@@ -10,7 +11,6 @@ exports.signup = async (req,res)=>{
         const address = req.body.address
         const tel_no1 = req.body.tel_no1
         const tel_no2 = req.body.tel_no2
-        const user_type = req.body.user_type
 
         res.cookie('uname',u_name)
         res.cookie('pwd',pwd)
@@ -18,7 +18,6 @@ exports.signup = async (req,res)=>{
         res.cookie('address',address)
         res.cookie('tel_no1',tel_no1)
         res.cookie('tel_no2',tel_no2)
-        res.cookie('user_type',user_type)
 
         if(!u_name || typeof u_name !== 'string'){
             res.clearCookie('uname');
@@ -40,9 +39,14 @@ exports.signup = async (req,res)=>{
             return res.redirect('/signup?tel_no2=false')
         }
 
-        if(!user_type || typeof user_type !== 'string'){
-            res.clearCookie('user_type');
-            return res.redirect('/signup?user_type=false')
+        if(tel_no1.length < 10 ){
+            res.clearCookie('tel_no1');
+            return res.redirect('/signup?tel_no1_len=false')
+        }
+
+        if(tel_no2.length < 10 ){
+            res.clearCookie('tel_no2');
+            return res.redirect('/signup?tel_no2_len=false')
         }
 
         if(u_name.length < 3){
@@ -82,7 +86,6 @@ exports.signup = async (req,res)=>{
             address:req.body.address,
             tel_no1:req.body.tel_no1,
             tel_no2:req.body.tel_no2,
-            user_type:req.body.user_type
         })
 
         const data = await newUser.save(newUser)
@@ -93,7 +96,6 @@ exports.signup = async (req,res)=>{
             res.clearCookie('address');
             res.clearCookie('tel_no1');
             res.clearCookie('tel_no2');
-            res.clearCookie('user_type');
             res.redirect('/signup?useradd=true')
         }else{
             res.send('Unable to add')
