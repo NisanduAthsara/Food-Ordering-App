@@ -12,6 +12,7 @@ app.set('view engine','ejs');
 
 app.use('/css',express.static(path.join(__dirname,'assets/css')))
 app.use('/img',express.static(path.join(__dirname,'assets/img')))
+app.use('/js',express.static(path.join(__dirname,'assets/js')))
 
 app.listen(PORT,()=>{
     console.log(`http://localhost:${PORT}`);

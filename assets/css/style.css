@@ -1,3 +1,28 @@
 .space{
     padding-left:15px;
 }
+
+.inner-nav{
+    width:100%;
+    padding:30px;
+    background:antiquewhite;
+}
+
+.links li{
+    display:inline-block;
+    margin-bottom: 20px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+    padding:10px;
+}
+
+.logo{
+    font-size:30px;
+    padding-bottom: 20px;
+}
