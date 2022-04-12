@@ -3,8 +3,20 @@ const app = express()
 const dotenv = require('dotenv/config')
 const routes = require('./server/routes/router')
 const path = require('path')
+const mongoose = require('mongoose')
 
 const PORT = process.env.PORT || 3000
+
+app.use(express.urlencoded({extended:true}))
+
+//connect to the database
+try{
+    mongoose.connect(process.env.MONGO,{useNewUrlParser:true},()=>{
+        console.log('DB connected');
+    })
+}catch(err){
+    console.log(err);
+}
 
 app.use(routes)
 
