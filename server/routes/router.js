@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express.Router()
 const signup = require('../controller/signup')
+const login = require('../controller/login')
 
 app.get('/',(req,res)=>{
     res.render('index')
@@ -15,5 +16,11 @@ app.get('/signup',(req,res)=>{
 })
 
 app.post('/api/signup',signup.signup)
+
+app.get('/login',(req,res)=>{
+    res.render('login')
+})
+
+app.post('/api/login',login.login)
 
 module.exports = app

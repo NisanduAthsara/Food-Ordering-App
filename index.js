@@ -5,6 +5,8 @@ const routes = require('./server/routes/router')
 const path = require('path')
 const mongoose = require('mongoose')
 const cookie_parser = require('cookie-parser')
+const session = require('express-session')
+const {v4:uuidv4} = require('uuid')
 
 const PORT = process.env.PORT || 3000
 
@@ -20,6 +22,12 @@ try{
 }catch(err){
     console.log(err);
 }
+
+app.use(session({
+    secret:uuidv4(),
+    resave:false,
+    saveUninitialized:true
+}))
 
 app.use(routes)
 
