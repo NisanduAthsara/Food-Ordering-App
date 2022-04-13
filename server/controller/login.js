@@ -18,7 +18,13 @@ exports.login = async (req,res)=>{
             const is_vali = await bcrypt.compare(req.body.password,data.password)
             if(is_vali){
                 req.session.username = data.username
-                res.redirect('/')
+                res.cookie('id',data._id)
+                if(data.user_type == 'User'){
+                    res.redirect('/')
+                }else{
+                    req.session.admin = true
+                    res.redirect('/admin/dashboard')
+                }
             }else{
                 if(req.session.username){
                     req.session.destroy((err)=>{
@@ -27,7 +33,10 @@ exports.login = async (req,res)=>{
                         }
                     })
                 }
-                res.redirect('/?login=false')
+                if(req.cookies.id){
+                    res.clearCookie('id')
+                }
+                res.redirect('/login?login=false')
             }
         }else{
             if(req.session.username){
@@ -37,7 +46,7 @@ exports.login = async (req,res)=>{
                     }
                 })
             }
-            res.redirect('/?login=false')
+            res.redirect('/login?login=false')
         }
     }catch(err){
 

@@ -7,12 +7,15 @@ const mongoose = require('mongoose')
 const cookie_parser = require('cookie-parser')
 const session = require('express-session')
 const {v4:uuidv4} = require('uuid')
+const fileUpload = require('express-fileupload');
 
 const PORT = process.env.PORT || 3000
 
 app.use(cookie_parser());
 
 app.use(express.urlencoded({extended:true}))
+
+app.use(fileUpload());
 
 //connect to the database
 try{

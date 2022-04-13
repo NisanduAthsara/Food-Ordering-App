@@ -1,0 +1,11 @@
+<%- include('partials/_header.ejs')%>
+
+<form method="POST" action="/api/new-food" enctype="multipart/form-data">
+    <input type="text" name="foodName" id="" placeholder="Food Name" required>
+    <input type="text" name="price" id="" placeholder="Price" required>
+    <input type="text" name="deliveryTime" id="" placeholder="Delivery Time" required>
+    <input type="file" name="image" id="">
+    <input type="submit" value="Add">
+</form>
+
+<%- include('partials/_footer.ejs')%>

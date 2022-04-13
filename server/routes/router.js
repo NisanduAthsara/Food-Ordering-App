@@ -2,9 +2,11 @@ const express = require('express')
 const app = express.Router()
 const signup = require('../controller/signup')
 const login = require('../controller/login')
+const logout = require('../controller/logout')
+const foods = require('../controller/foods')
 
 app.get('/',(req,res)=>{
-    res.render('index')
+    res.render('index',{user:req.session.username,id:req.cookies.id})
 })
 
 app.get('/login',(req,res)=>{
@@ -22,5 +24,21 @@ app.get('/login',(req,res)=>{
 })
 
 app.post('/api/login',login.login)
+
+app.get('/admin/dashboard',(req,res)=>{
+    res.render('dashboard')
+})
+
+app.get('/admin/foods',(req,res)=>{
+    res.render('foods')
+})
+
+app.get('/admin/new-food',(req,res)=>{
+    res.render('new-food')
+})
+
+app.post('/api/new-food',foods.addFood)
+
+app.get('/logout',logout)
 
 module.exports = app

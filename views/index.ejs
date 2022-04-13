@@ -1,10 +1,14 @@
 <%- include('partials/_header.ejs')%>
-
   <nav>
     <div class="inner-nav">
       <ul class="links">
         <li class="left logo"><a href="/" class="text-decoration-none">LOGO</a></li>
-        <li class="right"><a href="/login" class="text-decoration-none">LOGIN</a></li>
+        <% if(locals.user){ %>
+          <li class="right"><a href="/user/dashboard/<%=id%>" class="text-decoration-none">Profile</a></li>
+          <li class="right"><a href="/logout" class="text-decoration-none">Logout</a></li>
+        <% } else{ %>
+          <li class="right"><a href="/login" class="text-decoration-none">LOGIN</a></li>
+        <% } %>  
         <li class="right"><a href="/cart" class="text-decoration-none">CART</a></li>
       </ul>
     </div>
